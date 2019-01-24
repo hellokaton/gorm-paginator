@@ -27,8 +27,8 @@ type Paginator struct {
 	NextPage    int         `json:"next_page"`
 }
 
-// Pagging 分页
-func Pagging(p *Param, dataSource interface{}) *Paginator {
+// Paging 分页
+func Paging(p *Param, dataSource interface{}) *Paginator {
 	db := p.DB
 
 	if p.ShowSQL {

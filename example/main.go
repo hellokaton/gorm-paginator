@@ -56,14 +56,14 @@ func main() {
 		limit, _ := strconv.Atoi(c.DefaultQuery("limit", "3"))
 		var users []User
 
-		pagination := pagination.Pagging(&pagination.Param{
+		paginator := pagination.Pagging(&pagination.Param{
 			DB:      db,
 			Page:    page,
 			Limit:   limit,
 			OrderBy: []string{"id desc"},
 			ShowSQL: true,
 		}, &users)
-		c.JSON(200, pagination)
+		c.JSON(200, paginator)
 	})
 
 	r.Run()
