@@ -9,7 +9,6 @@ import (
 // Param 分页参数
 type Param struct {
 	DB      *gorm.DB
-	Result  *interface{}
 	Page    int
 	Limit   int
 	OrderBy []string
@@ -29,7 +28,7 @@ type Paginator struct {
 }
 
 // Paging 分页
-func Paging(p *Param) *Paginator {
+func Paging(p *Param, result interface{}) *Paginator {
 	db := p.DB
 
 	if p.ShowSQL {
@@ -52,7 +51,7 @@ func Paging(p *Param) *Paginator {
 	var count int
 	var offset int
 
-	go countRecords(db, p.Result, done, &count)
+	go countRecords(db, result, done, &count)
 
 	if p.Page == 1 {
 		offset = 0
@@ -60,11 +59,11 @@ func Paging(p *Param) *Paginator {
 		offset = (p.Page - 1) * p.Limit
 	}
 
-	db.Limit(p.Limit).Offset(offset).Find(p.Result)
+	db.Limit(p.Limit).Offset(offset).Find(result)
 	<-done
 
 	paginator.TotalRecord = count
-	paginator.Records = p.Result
+	paginator.Records = result
 	paginator.Page = p.Page
 
 	paginator.Offset = offset
@@ -85,7 +84,7 @@ func Paging(p *Param) *Paginator {
 	return &paginator
 }
 
-func countRecords(db *gorm.DB, countDataSource interface{}, done chan bool, count *int) {
-	db.Model(countDataSource).Count(count)
+func countRecords(db *gorm.DB, anyType interface{}, done chan bool, count *int) {
+	db.Model(anyType).Count(count)
 	done <- true
 }
