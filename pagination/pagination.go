@@ -52,7 +52,7 @@ func Paging(p *Param) *Paginator {
 	var count int
 	var offset int
 
-	go countRecords(db, p.dataSource, done, &count)
+	go countRecords(db, p.Result, done, &count)
 
 	if p.Page == 1 {
 		offset = 0
@@ -60,11 +60,11 @@ func Paging(p *Param) *Paginator {
 		offset = (p.Page - 1) * p.Limit
 	}
 
-	db.Limit(p.Limit).Offset(offset).Find(p.dataSource)
+	db.Limit(p.Limit).Offset(offset).Find(p.Result)
 	<-done
 
 	paginator.TotalRecord = count
-	paginator.Records = p.dataSource
+	paginator.Records = p.Result
 	paginator.Page = p.Page
 
 	paginator.Offset = offset

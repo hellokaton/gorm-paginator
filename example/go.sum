@@ -1,8 +1,0 @@
-github.com/biezhi/gorm-paginator v0.0.0-20190124081913-54ada098dbc1 h1:NvwGCDDGv8Ax8SpwMhgujsrCr9gaSs5IWp90PP/PtSQ=
-github.com/biezhi/gorm-paginator v0.0.0-20190124081913-54ada098dbc1/go.mod h1:Ojq6HkxEz6814vSw/+tYrn79UpRl5qH6CsA1qxl/CgI=
-github.com/gin-gonic/gin v1.3.0 h1:kCmZyPklC0gVdL728E6Aj20uYBJV93nj/TkwBTKhFbs=
-github.com/gin-gonic/gin v1.3.0/go.mod h1:7cKuhb5qV2ggCFctp2fJQ+ErvciLZrIeoOSOm6mUr7Y=
-github.com/jinzhu/gorm v1.9.2 h1:lCvgEaqe/HVE+tjAR2mt4HbbHAZsQOv3XAZiEZV37iw=
-github.com/jinzhu/gorm v1.9.2/go.mod h1:Vla75njaFJ8clLU1W44h34PjIkijhjHIYnZxMqCdxqo=
-github.com/mattn/go-sqlite3 v1.10.0 h1:jbhqpg7tQe4SupckyijYiy0mJJ/pRyHvXf7JdWK860o=
-github.com/mattn/go-sqlite3 v1.10.0/go.mod h1:FPy6KqzDD04eiIsT53CuJW3U88zkxoIYsOqkbpncsNc=
