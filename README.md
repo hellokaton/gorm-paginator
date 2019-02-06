@@ -15,7 +15,7 @@ type User struct {
 var users []User
 db = db.Where("id > ?", 0)
 
-pagination.Pagging(&pagination.Param{
+pagination.Paging(&pagination.Param{
     DB:      db,
     Page:    1,
     Limit:   3,
