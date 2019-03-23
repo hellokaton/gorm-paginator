@@ -15,7 +15,7 @@ type User struct {
 var users []User
 db = db.Where("id > ?", 0)
 
-pagination.Pagging(&pagination.Param{
+pagination.Paging(&pagination.Param{
     DB:      db,
     Page:    1,
     Limit:   3,
@@ -32,7 +32,7 @@ r.GET("/", func(c *gin.Context) {
     limit, _ := strconv.Atoi(c.DefaultQuery("limit", "3"))
     var users []User
 
-    paginator := pagination.Pagging(&pagination.Param{
+    paginator := pagination.Paging(&pagination.Param{
         DB:      db,
         Page:    page,
         Limit:   limit,
