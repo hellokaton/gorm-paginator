@@ -1,6 +1,7 @@
 package pagination
 
 import (
+	"fmt"
 	"math"
 
 	"github.com/jinzhu/gorm"
@@ -8,11 +9,12 @@ import (
 
 // Param 分页参数
 type Param struct {
-	DB      *gorm.DB
-	Page    int
-	Limit   int
-	OrderBy []string
-	ShowSQL bool
+	DB       *gorm.DB
+	Distinct string
+	Page     int
+	Limit    int
+	OrderBy  []string
+	ShowSQL  bool
 }
 
 // Paginator 分页返回
@@ -51,7 +53,7 @@ func Paging(p *Param, result interface{}) *Paginator {
 	var count int
 	var offset int
 
-	go countRecords(db, result, done, &count)
+	go countRecords(db, result, p.Distinct, done, &count)
 
 	if p.Page == 1 {
 		offset = 0
@@ -84,7 +86,13 @@ func Paging(p *Param, result interface{}) *Paginator {
 	return &paginator
 }
 
-func countRecords(db *gorm.DB, anyType interface{}, done chan bool, count *int) {
-	db.Model(anyType).Count(count)
+func countRecords(db *gorm.DB, anyType interface{}, distinct string, done chan bool, count *int) {
+	if len(distinct) > 0 {
+		// Refernce: https://github.com/jinzhu/gorm/issues/970#issuecomment-244251703
+		distinctStr := fmt.Sprintf("count(%s)", distinct)
+		db.Model(anyType).Select(distinctStr).Count(count)
+	} else {
+		db.Model(anyType).Count(count)
+	}
 	done <- true
 }
