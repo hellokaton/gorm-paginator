@@ -3,7 +3,7 @@
 ## Usage
 
 ```bash
-go get github.com/biezhi/gorm-paginator/pagination
+go get github.com/hellokaton/gorm-paginator/pagination
 ```
 
 ```go
